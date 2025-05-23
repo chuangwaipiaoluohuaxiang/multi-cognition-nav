@@ -31,7 +31,11 @@ class E2EModel(nn.Module):
         self.yolov3_fc = YoloV3FC().to(device)  # b*5--b*256
         # print("yolov3 loaded")
 
-        '''RetrievalNetwork'''
+        '''RetrievalNetwork'''。   #用的是alexnet，不知为何被注释掉了
+#输入两张图片（或一张图片和节点特征），
+#送入预训练模型，
+#得到一个相似度分数或特征，
+#用于辅助下游任务（如图节点定位、目标识别等）
         # model_path = 'RetrievalNet/best.pth'
         # model_state_dict = torch.load(model_path)
         # self.alexnet = lpips.LPIPS(pretrained=False, net='alex', version='0.1', lpips=True, spatial=False,

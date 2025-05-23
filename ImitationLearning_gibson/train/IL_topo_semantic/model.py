@@ -158,6 +158,7 @@ class E2EModel(nn.Module):
         node_features = torch.cat([topological_visual_feature, torch.zeros(self.TopologicalGraph.number_of_nodes(), 2).to(self.device)], 1)  # N*258
         self.TopologicalGraph.ndata['x'] = node_features
 
+    #视觉特征提取（ResNet等）；物体检测（YOLOv3）；语义图构建+GCN推理（融合视觉、检测、目标特征）；拓扑图定位+GCN推理（空间关系推理）；图结构交互与融合（语义-空间信息耦合；策略决策输出（动作、目标、方向）
     def forward(self, current_bgr=None, target_bgr=None, current_position_yaw=None, target_position_yaw=None,
                 scene_index=None,
                 obj_detect_results=None, current_visual_feature_=None, target_visual_feature_=None,

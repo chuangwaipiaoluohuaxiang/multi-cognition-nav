@@ -12,7 +12,7 @@ import torchvision.transforms.functional as f
 class myFunctions:
     def __init__(self):
         super().__init__()
-
+     #动态调整优化器的学习率
     def adjust_learning_rate(self, optimizer, initial_lr, lr_decay_step, global_episode):
         if lr_decay_step > 0:
             learning_rate = 0.9 * initial_lr * (lr_decay_step - global_episode) / lr_decay_step + 0.1 * initial_lr
@@ -24,7 +24,7 @@ class myFunctions:
             learning_rate = initial_lr
         # stats['learning_rate'].append(learning_rate)
         return learning_rate
-
+    #统计指标（如损失loss、准确率accuracy等）写入日志
     def writeSummary(self, writer, stats, global_step):
         for key in stats:
             if len(stats[key]) > 0:
@@ -32,7 +32,7 @@ class myFunctions:
                 writer.add_scalar(tag='Info/{}'.format(key), scalar_value=stat_mean, global_step=global_step)
                 stats[key] = []
         writer.flush()
-
+    #从磁盘批量加载并拼接所有训练用的轨迹数据（如观测、动作、目标检测、位姿等），为深度学习训练准备原始大数据。
     def read(self):
         obs_list = None
 
